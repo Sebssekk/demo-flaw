@@ -36,8 +36,17 @@ jobs:
 
     # Skip any PR created by dependabot to avoid permission issues:
     if: (github.actor != 'dependabot[bot]')  
-    
-  secret_example:
+  secret_leak_job:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+  secret_example_job:
     name: secret-example
     runs-on: ubuntu-latest
     steps:
@@ -63,9 +72,9 @@ jobs:
         with:
           python-version: '3.9'
       
-      - name: Install Application Dependencies
-        run: pip install -r requirements.txt
-        working-directory: . # Assumes requirements.txt is in the root
+      #- name: Install Application Dependencies
+      #  run: pip install -r requirements.txt
+      #  working-directory: . # Assumes requirements.txt is in the root
 
       - name: Run Trivy SCA Scan (Dependency Check)
         uses: aquasecurity/trivy-action@master
