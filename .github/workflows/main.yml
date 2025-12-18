@@ -1,0 +1,38 @@
+name: Comprehensive DevSecOps Pipeline (SAST, SCA, DAST)
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+permissions:
+  # This permission is required when uploading sarifs to any repository at GitHub
+  security-events: write
+  # These permissions are only required when uploading sarifs to private and internal repositories at GitHub
+  contents: read
+  actions: read
+jobs:
+  # ===============================================
+  # JOB 1: SAST (Static Analysis - Code Quality)
+  # ===============================================
+  sast_job:
+    name: semgrep-SAST
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+    
+      - name: Run Semgrep SAST Scan (Code Analysis)
+        run : semgrep ci --config auto --sarif > semgrep.sarif   
+      
+      - name: Upload SARIF file for GitHub Advanced Security Dashboard
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: semgrep.sarif
+        if: always()    
+
+    # Skip any PR created by dependabot to avoid permission issues:
+    if: (github.actor != 'dependabot[bot]')  
