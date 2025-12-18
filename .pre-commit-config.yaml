@@ -1,0 +1,23 @@
+# File: .pre-commit-config.yaml
+repos:
+  # REPO 1: Secret Scanning (Gitleaks)
+  # - repo: https://github.com/gitleaks/gitleaks
+  #   rev: v8.30.0 # Use a specific version tag
+  #   hooks:
+  #     - id: gitleaks
+  #       # Only check the files being committed
+  #       name: Check for Hardcoded Secrets
+
+  # REPO 2: Lightweight SAST (Semgrep)
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.144.0 # Use a specific version tag
+    hooks:
+      - id: semgrep
+        name: Lightweight SAST Scan
+        files: \.(py|js|ts|go)$ # Define file extensions to scan
+        args: [
+          '--config', 
+          'p/flask' ,
+          '--config', 
+          'p/owasp-top-ten' ,
+        ]
