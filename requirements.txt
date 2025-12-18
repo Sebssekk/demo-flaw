@@ -1,0 +1,16 @@
+cfgv==3.4.0
+click==8.1.1
+colorama==0.4.6
+distlib==0.4.0
+filelock==3.19.1
+Flask==1.0.2
+identify==2.6.15
+itsdangerous==2.0.1
+Jinja2==3.0.0
+MarkupSafe==3.0.3
+nodeenv==1.9.1
+platformdirs==4.4.0
+PyYAML==6.0.3
+virtualenv==20.35.4
+Werkzeug==2.2.2
+requests==2.20.0
