@@ -13,4 +13,4 @@ platformdirs==4.4.0
 PyYAML==6.0.3
 virtualenv==20.35.4
 Werkzeug==2.2.2
-requests==2.20.0
+requests==2.32.4
