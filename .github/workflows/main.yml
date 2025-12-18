@@ -36,3 +36,16 @@ jobs:
 
     # Skip any PR created by dependabot to avoid permission issues:
     if: (github.actor != 'dependabot[bot]')  
+    
+  secret_example:
+    name: secret-example
+    runs-on: ubuntu-latest
+    steps:
+    - shell: bash
+      env:
+        SUPER_SECRET: ${{ secrets.A_SECRET }}
+      run: |
+        echo "✅ GOOD WAY (never printed) -->"
+        echo $SUPER_SECRET > super-secret.txt
+        echo "⛔ BAD WAY (Fixed by SECRET MASKING) -->"
+        echo $SUPER_SECRET | tee super-secret2.txt
