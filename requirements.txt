@@ -11,6 +11,6 @@ MarkupSafe==3.0.3
 nodeenv==1.9.1
 platformdirs==4.4.0
 PyYAML==6.0.3
-virtualenv==20.35.4
+virtualenv==20.36.1
 Werkzeug==2.2.2
 requests==2.20.0
